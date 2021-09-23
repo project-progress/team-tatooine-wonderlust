@@ -1,0 +1,68 @@
+body{
+    margin: 0;
+}
+#search{
+    background: url("main-picture.jpg") no-repeat;
+    background-size: 100%;
+    text-align: center;
+}
+#logo img{
+    margin: 10px;
+}
+h1{
+    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 70px;
+    font-weight: 400;
+    color: white;
+    margin-top: 0;
+    padding-top: 130px;
+    letter-spacing: 2px;
+}
+form{
+    height: 100px;
+}
+input{
+    width: 300px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background: none;
+}
+button{
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+    color: white;
+    background-color: #27b7c1;
+    border-radius: 5px;
+}
+#info{
+    width: 60%;
+    margin: 100px auto 0;
+    padding-bottom: 50px;
+    display: none;
+}
+#weather_info{
+    width: 230px;
+    height: 280px;
+    margin: auto;
+    box-shadow: -3px 3px 10px 1px silver;
+    padding: 20px 0 0 20px;
+}
+#top_atr{
+    margin-left: 30px;
+}
+.attr_info{
+    width: 280px;
+    height: 280px;
+    float: left;
+    box-shadow: -2px 2px 7px 1px silver;
+}
+#clear{
+    clear: both;
+}
+h3{
+    font-weight: 100;
+    font-size: 20px;
+    margin: 2px 0;
+}
