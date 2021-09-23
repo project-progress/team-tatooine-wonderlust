@@ -11,7 +11,7 @@ document.getElementsByTagName("button")[0].onclick = function(){
         let date = new Date();
         let option = { weekday: 'long'};
         let newDate = new Intl.DateTimeFormat('en-US', option).format(date);
-        //Creat Element and add to DOM
+        // Creat Element and add to DOM
         let weatherInfo = document.getElementById("weather_info");
         let infoDate = document.createElement("h3");
         let infoTemp = document.createElement("h3");
@@ -23,7 +23,7 @@ document.getElementsByTagName("button")[0].onclick = function(){
         infoDate.textContent = newDate; // Day in week
         infoTemp.textContent = "Temperature: "+result.main.temp + "\u2103";// in Celsius
         infoCondition.textContent = "Condition: "+result.weather[0].description; 
-        //clean childes
+        // clean childes
         weatherInfo.innerHTML = " ";
         // append child
         weatherInfo.appendChild(infoDate);
@@ -31,6 +31,6 @@ document.getElementsByTagName("button")[0].onclick = function(){
         weatherInfo.appendChild(infoCondition);
         weatherInfo.appendChild(infoImg);
     });
-}
-
+} 
+ 
 
