@@ -1,14 +1,17 @@
 body{
     margin: 0;
 }
+
 #search{
     background: url("../image/main-picture.jpg") no-repeat;
     background-size: 100%;
     text-align: center;
 }
+
 #logo img{
     margin: 10px;
 }
+
 h1{
     font-family: Montserrat;
     font-size: 64px;
@@ -19,9 +22,11 @@ h1{
     letter-spacing: 1.1px;
     text-align: center;
 }
+
 form{
     height: 100px;
 }
+
 input{
     width: 300px;
     height: 50px;
@@ -29,6 +34,7 @@ input{
     border-radius: 5px;
     background: none;
 }
+
 button{
     width: 150px;
     height: 50px;
@@ -37,18 +43,21 @@ button{
     background-color: #27b7c1;
     border-radius: 5px;
 }
+
 #info{
     width: 60%;
     margin: 100px auto 0;
     padding-bottom: 50px;
     display: none;
 }
+
 #cityName{
     color: #27b7c1;
     font-size: 35px;
     font-weight: 600;
     margin: 0;
 }
+
 #weather_info{
     width: 230px;
     height: 280px;
@@ -56,18 +65,22 @@ button{
     box-shadow: -3px 3px 10px 1px silver;
     padding: 20px 0 0 20px;
 }
+
 #top_atr{
     margin-left: 30px;
 }
+
 .attr_info{
     width: 280px;
     height: 280px;
     float: left;
     box-shadow: -2px 2px 7px 1px silver;
 }
+
 #clear{
     clear: both;
 }
+
 h3{
     font-weight: 100;
     font-size: 20px;
