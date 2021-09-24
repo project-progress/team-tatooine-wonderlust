@@ -1,4 +1,5 @@
-function displayWeather (city) {
+document.getElementsByTagName("button")[0].onclick = function () {
+    let city = document.getElementsByTagName("input")[0].value;
     fetch("http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
     .then(response => response.json())
     .then(function(result){
@@ -35,18 +36,17 @@ function displayWeather (city) {
         weatherInfo.appendChild(infoCondition);
         weatherInfo.appendChild(infoImg);
     });
-}
-
-function displayAttractions (city) {
-    fetch(`https://api.foursquare.com/v2/venues/search?near=armenia&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924`)
+    fetch("https://api.foursquare.com/v2/venues/search?near= "+ city + " &client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
     .then(response => response.json())
     .then(function(result){
-        console.log(result.response)
-    });
-}
+            console.log(result)
+        }
+        
+    );
 
-document.getElementsByTagName("button")[0].onclick = function () {
-    let city = document.getElementsByTagName("input")[0].value;
-    displayWeather(city);
-    displayAttractions(city);
 }
+ 
+    
+
+
+
