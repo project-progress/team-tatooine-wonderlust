@@ -101,6 +101,22 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+.invisible{
+    font-size: 20px;
+    letter-spacing: 1.1px;
+    text-align: center;
+    color: #27b7c1;
+    padding-top: 60px;
+    display: none;
+}
+.visible{
+    font-size: 20px;
+    letter-spacing: 1.1px;
+    text-align: center;
+    color: #27b7c1;
+    padding-top: 60px;
+    display: block;
+}
 
 #info {
     width: 90%;

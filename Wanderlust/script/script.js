@@ -1,3 +1,5 @@
+let errorMessage = document.getElementById("error", false)
+
 function displayWeather (city) {
     fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
     .then(response => response.json())
@@ -20,6 +22,7 @@ function displayWeather (city) {
         let infoCondition = document.createElement("h3");
         let infoImg = document.createElement("img");
         let cityName = document.getElementById("cityName");
+      
         cityName.textContent = result.name;
         infoImg.setAttribute("src", "https://openweathermap.org/img/wn/"+result.weather[0].icon+"@2x.png") // Weather icon in temp
         infoDate.textContent = newDate; // Day in week
@@ -37,6 +40,7 @@ function displayWeather (city) {
     })
     .catch (() => {
         document.getElementById("info").style.display = "none";
+        
     });
 }
 
@@ -44,6 +48,9 @@ function displayAttractions (city) {
     fetch("https://api.foursquare.com/v2/venues/explore?near=" + city + "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
     .then(response => response.json())
     .then(function(result){
+
+        errorMessage.classList.toggle("invisible", true);
+
             let attractionDivs = document.getElementsByClassName('attr_info');
             let res = result.response.groups[0].items;
             for (let i = 0; i < attractionDivs.length; i++) {
@@ -69,6 +76,9 @@ function displayAttractions (city) {
                 `;
                 addr.setAttribute('class', 'addrAttr');
                 currentDiv.appendChild(addr);
+<<<<<<< HEAD
+               
+=======
 
                 let favIcon = document.createElement('div');
                 favIcon.setAttribute('class', 'favIconDiv');
@@ -83,11 +93,12 @@ function displayAttractions (city) {
                 textFav.setAttribute('class', 'favIconText');
                 textFav.innerText = "Add to favorites";
                 favIcon.appendChild(textFav);
+>>>>>>> caf8128aa6814b39db00c543641705e0f69926b4
             }
         }  
     )
     .catch ((e) => {
-        alert('Input correct place name!');
+        errorMessage.classList.toggle("visible");
     });
 }
 
