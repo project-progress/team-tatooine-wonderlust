@@ -77,6 +77,15 @@ function displayAttractions (city) {
     });
 }
 
+document.addEventListener("keydown", function(event){
+    if(event.key == "Enter"){
+        let city = document.getElementsByTagName("input")[0].value;
+        displayWeather(city);
+        displayAttractions(city);
+        event.preventDefault();
+    }
+})
+
 document.getElementsByTagName("button")[0].onclick = function () {
     let city = document.getElementsByTagName("input")[0].value;
     displayWeather(city);
