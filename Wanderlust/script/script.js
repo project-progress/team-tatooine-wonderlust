@@ -76,10 +76,6 @@ function displayAttractions (city) {
                 `;
                 addr.setAttribute('class', 'addrAttr');
                 currentDiv.appendChild(addr);
-<<<<<<< HEAD
-               
-=======
-
                 let favIcon = document.createElement('div');
                 favIcon.setAttribute('class', 'favIconDiv');
                 currentDiv.appendChild(favIcon);
@@ -92,9 +88,7 @@ function displayAttractions (city) {
                 let textFav = document.createElement('p');
                 textFav.setAttribute('class', 'favIconText');
                 textFav.innerText = "Add to favorites";
-                favIcon.appendChild(textFav);
->>>>>>> caf8128aa6814b39db00c543641705e0f69926b4
-            }
+                favIcon.appendChild(textFav);            }
         }  
     )
     .catch ((e) => {
