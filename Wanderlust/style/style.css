@@ -50,21 +50,30 @@ header {
 
 .favIconDiv {
     width: fit-content;
-    float: left;
-    margin-left: 10px;
+    margin: 10px auto;
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.favIconDiv:hover {
+    background-color: rgb(64, 179, 255);
 }
 
 .favIconImage {
     width: 25px;
     height: 25px;
     float: left;
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
 .favIconText {
     width: fit-content;
     float: right;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 h1 {
