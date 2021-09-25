@@ -1,6 +1,7 @@
 body {
     margin: 0;
 }
+
 #search{
     background: url('https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_desktop.jpg');
     background-repeat: no-repeat;
@@ -10,6 +11,60 @@ body {
 
 #logo img {
     margin: 10px;
+}
+
+header {
+    overflow: hidden;
+}
+
+#logo {
+    width: fit-content;
+    float: left;
+}
+
+#favIconDiv {
+    margin-top: 5px;
+    float: right;
+    cursor: pointer;
+    width: fit-content;
+    padding-left: 15px;
+    padding-right: 10px;
+    margin-right: 20px;
+}
+
+#favIconDiv:hover {
+    background-color: rgb(64, 179, 255);
+    border-radius: 15px;
+}
+
+#favIconDiv img {
+    float: left;
+    margin-top: 12px;
+    margin-right: 5px;
+}
+
+#favIconDiv p{
+    float: right;
+    margin-right: 10px;
+}
+
+.favIconDiv {
+    width: fit-content;
+    float: left;
+    margin-left: 10px;
+}
+
+.favIconImage {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-top: 5px;
+}
+
+.favIconText {
+    width: fit-content;
+    float: right;
+    margin-top: 5px;
 }
 
 h1 {
@@ -44,6 +99,7 @@ button {
     color: white;
     background-color: #27b7c1;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 #info {
@@ -76,7 +132,6 @@ button {
 
 .attr_info {
     width: 280px;
-    height: 280px;
     box-shadow: -2px 2px 7px 1px silver;
 }
 
