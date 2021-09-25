@@ -76,6 +76,7 @@ function displayAttractions (city) {
                 `;
                 addr.setAttribute('class', 'addrAttr');
                 currentDiv.appendChild(addr);
+
                 let favIcon = document.createElement('div');
                 favIcon.setAttribute('class', 'favIconDiv');
                 currentDiv.appendChild(favIcon);
@@ -89,12 +90,22 @@ function displayAttractions (city) {
                 textFav.setAttribute('class', 'favIconText');
                 textFav.innerText = "Add to favorites";
                 favIcon.appendChild(textFav);            }
-        }  
+                favIcon.appendChild(textFav);
+            }
     )
     .catch ((e) => {
         errorMessage.classList.toggle("visible");
     });
 }
+
+document.addEventListener("keydown", function(event){
+    if(event.key == "Enter"){
+        let city = document.getElementsByTagName("input")[0].value;
+        displayWeather(city);
+        displayAttractions(city);
+        event.preventDefault();
+    }
+})
 
 document.getElementsByTagName("button")[0].onclick = function () {
     let city = document.getElementsByTagName("input")[0].value;
