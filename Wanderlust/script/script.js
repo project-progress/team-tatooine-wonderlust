@@ -1,13 +1,7 @@
 function displayWeather(city) {
-    fetch(
-      "http://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric"
-    )
+    fetch("http://api.openweathermap.org/data/2.5/weather?q=" +city+"&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
       .then((response) => response.json())
       .then(function (result) {
-        // Error message element
-  
         // input value we empty
         document.getElementsByTagName("input")[0].value = "";
   
@@ -28,12 +22,7 @@ function displayWeather(city) {
         let cityName = document.getElementById("cityName");
   
         cityName.textContent = result.name;
-        infoImg.setAttribute(
-          "src",
-          "https://openweathermap.org/img/wn/" +
-            result.weather[0].icon +
-            "@2x.png"
-        ); // Weather icon in temp
+        infoImg.setAttribute("src","https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png"); // Weather icon in temp
         infoDate.textContent = newDate; // Day in week
         infoTemp.textContent = "Temperature: " + result.main.temp + "\u2103"; // Temperature in Celsius
         infoCondition.textContent = "Condition: " + result.weather[0].description;
@@ -49,17 +38,15 @@ function displayWeather(city) {
         weatherInfo.appendChild(infoCondition);
         weatherInfo.appendChild(infoImg);
       })
-      .catch(() => {
+      .catch((err) => {
         document.getElementById("info").style.display = "none";
+        console.log("Fetch Error :-S", err);
       });
   }
   
   function displayAttractions(city) {
     fetch(
-      "https://api.foursquare.com/v2/venues/explore?near=" +
-        city +
-        "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924"
-    )
+      "https://api.foursquare.com/v2/venues/explore?near=" + city +"&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
       .then((response) => response.json())
       .then(function (result) {
         let attractionDivs = document.getElementsByClassName("attr_info");
