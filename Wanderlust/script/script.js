@@ -3,7 +3,7 @@ function displayWeather (city) {
     .then(response => response.json())
     .then(function(result){
         // input value we empty
-        document.getElementsByTagName("input")[0].value = " "; 
+        document.getElementsByTagName("input")[0].value = ""; 
         
         // Info visiable
         document.getElementById("info").style.display = "block";
