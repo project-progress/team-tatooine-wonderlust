@@ -141,23 +141,25 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
       document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
     }
     localStorage.setItem('data', JSON.stringify(obj));
-  } else {
-    let obj = {
-      favData: [
-        {
-          city: city,
-          index: index,
-          name: name,
-          locAddress: locAddress,
-          locCountry: locCountry,
-          locIcon: locIcon
-        }
-      ]
-    }
-    localStorage.setItem('data', JSON.stringify(obj));
-    document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
-    
-  }
+  } 
+
+  // else {
+  //   let obj = {
+  //     favData: [
+  //       {
+  //         city: city,
+  //         index: index,
+  //         name: name,
+  //         locAddress: locAddress,
+  //         locCountry: locCountry,
+  //         locIcon: locIcon
+  //       }
+  //     ]
+  //   }
+  //   localStorage.setItem('data', JSON.stringify(obj));
+  //   document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
+  // }
+
 }
 
 //Take and add in DOM favorite attractions
@@ -169,10 +171,9 @@ function takeFavoriteLocal(){
   // clear info 
   let favoriteDiv = document.getElementById("favorite");
   favoriteDiv.innerHTML= " ";
-
+  
   //Take from local storage info
   let localobj = JSON.parse(localStorage.getItem('data')).favData;
-  console.log(localobj);
   for (let i = 0; i < localobj.length; i++) {
     
     let favDiv = document.createElement('div')
@@ -200,14 +201,32 @@ function takeFavoriteLocal(){
       `;
       locAddr.setAttribute("class", "addrAttr");
 
+    //Icon element creat
+    let favIconimg = document.createElement('img');
+    favIconimg.setAttribute('src', './images/star.png');
+    favIconimg.setAttribute('class', 'favImgIcon');
+
     //Append child 
+    favDiv.appendChild(favIconimg);
     favDiv.appendChild(favCityName);
     favDiv.appendChild(faveAttrName);
     favDiv.appendChild(favImg);
     favDiv.appendChild(locAddr);
     favoriteDiv.appendChild(favDiv);
   }
-
+  let favChangeIcon = document.getElementsByClassName('favImgIcon');
+    let star = true;
+    for (let j = 0; j < favChangeIcon.length; j++) {
+        favChangeIcon[j].onclick = function(){
+          if (star) {
+            this.setAttribute('src', './images/favorites.png');
+            star = false;
+          }else{
+            this.setAttribute('src', './images/star.png');
+            star = true;
+          }
+        }
+    }
 }
 
 // Keyword ENTER submit 
@@ -229,5 +248,5 @@ document.getElementsByTagName("button")[0].onclick = function () {
 
 //Click favorite
 document.getElementById("favIconDiv").onclick = function () {
-  takeFavoriteLocal();
+  takeFavoriteLocal(); 
 }

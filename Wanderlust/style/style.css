@@ -212,6 +212,12 @@ h3 {
 .favDiv h2{
     text-transform: capitalize;
 }
+.favImgIcon{
+    width: 25px;
+    height: 25px;
+    float: right;
+    margin: 10px 10px 0 0;
+}
 @media (max-width: 845px) {   
     #search {
         background: url('https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_moble.jpg');
@@ -243,7 +249,7 @@ h3 {
         width: 95%;
     }
 
-    .attr_info {
+    .attr_info, #favorite div{
         width: 100%;
         margin-top: 30px;
     }
@@ -255,6 +261,7 @@ h3 {
 
     #weather_info {
         width: 100% !important;
+        padding-left: 0;
     }
 
     .attraction h2 {
