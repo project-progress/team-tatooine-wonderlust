@@ -90,28 +90,28 @@ function displayAttractions(city) {
       }
       currentDiv.appendChild(favIcon);
 
-      // if (localStorage.getItem('data') !== null) {
-      //   let obj = JSON.parse(localStorage.getItem('data'));
-      //   let stateFav = false;
-
-      //   for (let i = 0; i < obj.favData.length; i++) {
-      //     if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === i) {
-      //       stateFav = true;
-      //     }
-      //   }
-
-      //   if (stateFav) {
-      //     iconImg.setAttribute('src', './images/star.png');
-      //   } else {
-      //     iconImg.setAttribute('src', './images/favorites.png');
-      //   }
-      // } else {
-      //   iconImg.setAttribute('src', './images/favorites.png');
-      // }
-
       let iconImg = document.createElement('img');
-      iconImg.setAttribute('src', './images/favorites.png');
       iconImg.setAttribute('class', 'favIconImage');
+      
+      if (localStorage.getItem('data')) { 
+        let obj = JSON.parse(localStorage.getItem('data'));
+        let stateFav = false;
+
+        for (let j = 0; j < obj.favData.length; j++) {
+          if (obj.favData[j].city.toLowerCase() === city.toLowerCase() && obj.favData[j].index === i) {
+            stateFav = true;
+          }
+        }
+
+        if (stateFav) {
+          iconImg.setAttribute('src', './images/star.png');
+        } else {
+          iconImg.setAttribute('src', './images/favorites.png');
+        }
+      } else {
+        iconImg.setAttribute('src', './images/favorites.png');
+      }
+      
       favIcon.appendChild(iconImg);
 
       let textFav = document.createElement('p');
@@ -193,7 +193,7 @@ function takeFavoriteLocal(){
   let localobj = JSON.parse(localStorage.getItem('data')).favData;
   for (let i = 0; i < localobj.length; i++) {
     
-    let favDiv = document.createElement('div')
+    let favDiv = document.createElement('div');
     favDiv.setAttribute("class", "favDiv");
 
     //Create h2 h3 and img tags and add info from local storage
@@ -231,19 +231,45 @@ function takeFavoriteLocal(){
     favDiv.appendChild(locAddr);
     favoriteDiv.appendChild(favDiv);
   }
+
   let favChangeIcon = document.getElementsByClassName('favImgIcon');
-    let star = true;
-    for (let j = 0; j < favChangeIcon.length; j++) {
-        favChangeIcon[j].onclick = function(){
-          if (star) {
-            this.setAttribute('src', './images/favorites.png');
-            star = false;
-          }else{
-            this.setAttribute('src', './images/star.png');
-            star = true;
+  let star = true;
+  for (let j = 0; j < favChangeIcon.length; j++) {
+    favChangeIcon[j].onclick = function () {
+      if (star) {
+        this.setAttribute('src', './images/favorites.png');
+        star = false;
+
+        let isNotFav = false;
+        for (let z = 0; z < localobj.length; z++) {
+          console.log(localobj[z].name)
+          console.log(localobj[j].name)
+          if (localobj[z].name === localobj[j].name) {
+            isNotFav = true;
+          }
+
+          if (isNotFav && z !== localobj.length - 1) {
+            let temp = localobj[z];
+            localobj[z] = localobj[z + 1];
+            localobj[z + 1] = temp;
+          }
+
+          if (z === localobj.length - 1) {
+            localobj.pop();
+
+            let dataFavorites = {
+              favData: localobj
+            }
+
+            localStorage.setItem('data', JSON.stringify(dataFavorites));
           }
         }
+      }else{
+        this.setAttribute('src', './images/star.png');
+        star = true;
+      }
     }
+  }
 }
 
 // Keyword ENTER submit 

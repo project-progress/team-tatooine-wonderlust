@@ -209,15 +209,19 @@ h3 {
     letter-spacing: 1.5px;
     color: #27b7c1;
 }
+
 .favDiv h2{
     text-transform: capitalize;
 }
+
 .favImgIcon{
     width: 25px;
     height: 25px;
+    cursor: pointer;
     float: right;
     margin: 10px 10px 0 0;
 }
+
 @media (max-width: 845px) {   
     #search {
         background: url('https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_moble.jpg');
