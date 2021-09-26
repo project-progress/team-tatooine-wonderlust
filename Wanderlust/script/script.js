@@ -79,9 +79,32 @@ function displayAttractions(city) {
 
       let favIcon = document.createElement('div');
       favIcon.setAttribute('class', 'favIconDiv');
+      favIcon.onclick = function () {
+        addingToFavorites(city, i);
+      }
       currentDiv.appendChild(favIcon);
 
       let iconImg = document.createElement('img');
+      
+      // if (localStorage.getItem('data') !== null) {
+      //   let obj = JSON.parse(localStorage.getItem('data'));
+      //   let stateFav = false;
+        
+      //   for (let i = 0; i < obj.favData.length; i++) {
+      //     if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === i) {
+      //       stateFav = true;
+      //     }
+      //   }
+
+      //   if (stateFav) {
+      //     iconImg.setAttribute('src', './images/star.png');
+      //   } else {
+      //     iconImg.setAttribute('src', './images/favorites.png');
+      //   }
+      // } else {
+      //   iconImg.setAttribute('src', './images/favorites.png');
+      // }
+
       iconImg.setAttribute('src', './images/favorites.png');
       iconImg.setAttribute('class', 'favIconImage');
       favIcon.appendChild(iconImg);
@@ -114,3 +137,50 @@ document.getElementsByTagName("button")[0].onclick = function () {
   displayWeather(city);
   displayAttractions(city);
 };
+
+function addingToFavorites (city, index) {
+  if (localStorage.getItem('data')) {
+    let obj = JSON.parse(localStorage.getItem('data'));
+    let state = false;
+    
+    for (let i = 0; i < obj.favData.length; i++) {
+      if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === index) {
+        document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/favorites.png');
+        state = true;
+      }
+
+      if (state) {
+        if (i === obj.favData.length - 1) {
+          let a = obj.favData.pop();
+        } else {
+          let temp = obj.favData[i];
+          obj.favData[i] = obj.favData[i + 1];
+          obj.favData[i + 1] = temp;
+        }
+      }
+    }
+
+    if (!state) {
+      obj.favData.push({
+        city: city,
+        index: index,
+      })
+
+      document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
+    }
+
+    localStorage.setItem('data', JSON.stringify(obj));
+  } else {
+    let obj = {
+      favData: [
+        {
+          city: city,
+          index: index,
+        }
+      ]
+    }
+
+    localStorage.setItem('data', JSON.stringify(obj));
+    document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
+  }
+}
