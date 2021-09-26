@@ -90,6 +90,25 @@ function displayAttractions(city) {
       }
       currentDiv.appendChild(favIcon);
 
+      // if (localStorage.getItem('data') !== null) {
+      //   let obj = JSON.parse(localStorage.getItem('data'));
+      //   let stateFav = false;
+
+      //   for (let i = 0; i < obj.favData.length; i++) {
+      //     if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === i) {
+      //       stateFav = true;
+      //     }
+      //   }
+
+      //   if (stateFav) {
+      //     iconImg.setAttribute('src', './images/star.png');
+      //   } else {
+      //     iconImg.setAttribute('src', './images/favorites.png');
+      //   }
+      // } else {
+      //   iconImg.setAttribute('src', './images/favorites.png');
+      // }
+
       let iconImg = document.createElement('img');
       iconImg.setAttribute('src', './images/favorites.png');
       iconImg.setAttribute('class', 'favIconImage');
@@ -141,24 +160,22 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
       document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
     }
     localStorage.setItem('data', JSON.stringify(obj));
-  } 
-
-  // else {
-  //   let obj = {
-  //     favData: [
-  //       {
-  //         city: city,
-  //         index: index,
-  //         name: name,
-  //         locAddress: locAddress,
-  //         locCountry: locCountry,
-  //         locIcon: locIcon
-  //       }
-  //     ]
-  //   }
-  //   localStorage.setItem('data', JSON.stringify(obj));
-  //   document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
-  // }
+  }else {
+    let obj = {
+      favData: [
+        {
+          city: city,
+          index: index,
+          name: name,
+          locAddress: locAddress,
+          locCountry: locCountry,
+          locIcon: locIcon
+        }
+      ]
+    }
+    localStorage.setItem('data', JSON.stringify(obj));
+    document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
+  }
 
 }
 
