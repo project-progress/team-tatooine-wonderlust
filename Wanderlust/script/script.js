@@ -51,11 +51,14 @@ function displayWeather(city) {
 }
 // Top Attractions section
 function displayAttractions(city) {
+  let responseLength;
   fetch("https://api.foursquare.com/v2/venues/explore?near=" + city + "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
   .then((response) => response.json())
   .then(function (result) {
     let attractionDivs = document.getElementsByClassName("attr_info");
     let res = result.response.groups[0].items;
+    responseLength = res.length;
+
     for (let i = 0; i < attractionDivs.length; i++) {
       let currentDiv = attractionDivs[i];
       currentDiv.innerHTML = "";
@@ -121,9 +124,17 @@ function displayAttractions(city) {
       favIcon.appendChild(textFav);
     }
   })
-  .catch((e) => {
-    const errorMessage = document.getElementById("error");
-    errorMessage.textContent = "Enter correct city Name!";
+  .catch(() => {
+    if (!Number.isFinite(responseLength)) {
+      const errorMessage = document.getElementById("error");
+      errorMessage.textContent = "Enter correct city Name!";
+    } else {
+      let attractionDivs = document.getElementsByClassName("attr_info");
+      
+      for(let i = responseLength; i < attractionDivs.length; i++) {
+        attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
+      }
+    }
   });
 }
 
@@ -232,9 +243,10 @@ function takeFavoriteLocal(){
     favoriteDiv.appendChild(favDiv);
   }
 
-  let favChangeIcon = document.getElementsByClassName('favImgIcon');
-  let star = true;
-  for (let j = 0; j < favChangeIcon.length; j++) {
+  let favChangeIcon = document.getElementsByClassName('favImgIcon'),
+      star = true,
+      lengthArrayData = favChangeIcon.length;
+  for (let j = 0; j < lengthArrayData; j++) {
     favChangeIcon[j].onclick = function () {
       if (star) {
         this.setAttribute('src', './images/favorites.png');
@@ -242,9 +254,10 @@ function takeFavoriteLocal(){
 
         let isNotFav = false;
         for (let z = 0; z < localobj.length; z++) {
-          console.log(localobj[z].name)
-          console.log(localobj[j].name)
-          if (localobj[z].name === localobj[j].name) {
+          console.log(localobj);
+          console.log(": z is " + z)
+          console.log(": j is " + j)
+          if (localobj[z].city.toLowerCase === localobj[j].city.toLowerCase && localobj[z].index === localobj[j].index) {
             isNotFav = true;
           }
 
@@ -256,6 +269,8 @@ function takeFavoriteLocal(){
 
           if (z === localobj.length - 1) {
             localobj.pop();
+            isNotFav = false;
+            console.log("removed")
 
             let dataFavorites = {
               favData: localobj
@@ -269,7 +284,7 @@ function takeFavoriteLocal(){
         star = true;
       }
     }
-  }
+  }console.log(localobj)
 }
 
 // Keyword ENTER submit 
@@ -292,4 +307,9 @@ document.getElementsByTagName("button")[0].onclick = function () {
 //Click favorite
 document.getElementById("favIconDiv").onclick = function () {
   takeFavoriteLocal(); 
+}
+
+document.getElementById('logo').onclick = function () {
+  document.getElementById('info').style.display = 'none';
+  document.getElementById('favoriteAttraction').style.display = 'none'
 }

@@ -18,6 +18,7 @@ header {
 }
 
 #logo {
+    cursor: pointer;
     width: fit-content;
     float: left;
 }
@@ -193,11 +194,11 @@ h3 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
 }
 
 #favorite div{
-    width: 18%;
+    width: 30%;
     margin: 0 0 2% 2%;    
     box-shadow: -2px 2px 7px 1px silver;
 }
@@ -222,11 +223,21 @@ h3 {
     margin: 10px 10px 0 0;
 }
 
+.noAttrText {
+    text-align: center;
+    color: #27b7c1;
+    margin-top: calc(50% - 9px);
+}
+
 @media (max-width: 845px) {   
     #search {
         background: url('https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_moble.jpg');
         background-repeat: no-repeat;
         background-size: cover;
+    }
+
+    .noAttrText {
+        margin-top: 16px;
     }
 
     h1 {
