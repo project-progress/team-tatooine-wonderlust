@@ -122,8 +122,8 @@ function displayAttractions(city) {
     }
   })
   .catch((e) => {
-
     document.getElementById("popup").style.display = "block";
+    document.getElementById("backdrop").style.display = "block";
   });
   
 }
@@ -275,5 +275,6 @@ document.getElementById("favIconDiv").onclick = function () {
 // close popup message box
 document.querySelector(".popup-button").addEventListener("click", function() {
   document.getElementById("popup").style.display = "none";
+  document.getElementById("backdrop").style.display = "none";
 })
 
