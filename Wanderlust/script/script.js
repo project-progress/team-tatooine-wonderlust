@@ -248,43 +248,37 @@ function takeFavoriteLocal(){
       lengthArrayData = favChangeIcon.length;
   for (let j = 0; j < lengthArrayData; j++) {
     favChangeIcon[j].onclick = function () {
-      if (star) {
-        this.setAttribute('src', './images/favorites.png');
-        star = false;
+      let isNotFav = false;
+      for (let z = 0; z < localobj.length; z++) {
+        if (localobj[z].city.toLowerCase() === localobj[j].city.toLowerCase() && localobj[z].index === localobj[j].index) {
+          //Change star in favorite 
+          this.setAttribute('src', './images/favorites.png');
+          star = false;
 
-        let isNotFav = false;
-        for (let z = 0; z < localobj.length; z++) {
-          console.log(localobj);
-          console.log(": z is " + z)
-          console.log(": j is " + j)
-          if (localobj[z].city.toLowerCase === localobj[j].city.toLowerCase && localobj[z].index === localobj[j].index) {
-            isNotFav = true;
-          }
+          isNotFav = true;
+        }
 
-          if (isNotFav && z !== localobj.length - 1) {
+        if (isNotFav) {
+          if (z === localobj.length - 1) {
+            localobj.pop();
+            let dataFavorites = {
+              favData: localobj
+            }
+            localStorage.setItem('data', JSON.stringify(dataFavorites));
+
+          } else {
             let temp = localobj[z];
             localobj[z] = localobj[z + 1];
             localobj[z + 1] = temp;
           }
-
-          if (z === localobj.length - 1) {
-            localobj.pop();
-            isNotFav = false;
-            console.log("removed")
-
-            let dataFavorites = {
-              favData: localobj
-            }
-
-            localStorage.setItem('data', JSON.stringify(dataFavorites));
-          }
+        }else{
+          //Change star in favorite 
+          this.setAttribute('src', './images/star.png');
+          star = true;
         }
-      }else{
-        this.setAttribute('src', './images/star.png');
-        star = true;
       }
     }
-  }console.log(localobj)
+  }
 }
 
 // Keyword ENTER submit 
@@ -311,5 +305,5 @@ document.getElementById("favIconDiv").onclick = function () {
 
 document.getElementById('logo').onclick = function () {
   document.getElementById('info').style.display = 'none';
-  document.getElementById('favoriteAttraction').style.display = 'none'
+  document.getElementById('favoriteAttraction').style.display = 'none';
 }
