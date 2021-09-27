@@ -51,14 +51,11 @@ function displayWeather(city) {
 }
 // Top Attractions section
 function displayAttractions(city) {
-  let responseLength;
   fetch("https://api.foursquare.com/v2/venues/explore?near=" + city + "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
   .then((response) => response.json())
   .then(function (result) {
     let attractionDivs = document.getElementsByClassName("attr_info");
     let res = result.response.groups[0].items;
-    responseLength = res.length;
-
     for (let i = 0; i < attractionDivs.length; i++) {
       let currentDiv = attractionDivs[i];
       currentDiv.innerHTML = "";
@@ -93,28 +90,28 @@ function displayAttractions(city) {
       }
       currentDiv.appendChild(favIcon);
 
+      // if (localStorage.getItem('data') !== null) {
+      //   let obj = JSON.parse(localStorage.getItem('data'));
+      //   let stateFav = false;
+
+      //   for (let i = 0; i < obj.favData.length; i++) {
+      //     if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === i) {
+      //       stateFav = true;
+      //     }
+      //   }
+
+      //   if (stateFav) {
+      //     iconImg.setAttribute('src', './images/star.png');
+      //   } else {
+      //     iconImg.setAttribute('src', './images/favorites.png');
+      //   }
+      // } else {
+      //   iconImg.setAttribute('src', './images/favorites.png');
+      // }
+
       let iconImg = document.createElement('img');
+      iconImg.setAttribute('src', './images/favorites.png');
       iconImg.setAttribute('class', 'favIconImage');
-      
-      if (localStorage.getItem('data')) { 
-        let obj = JSON.parse(localStorage.getItem('data'));
-        let stateFav = false;
-
-        for (let j = 0; j < obj.favData.length; j++) {
-          if (obj.favData[j].city.toLowerCase() === city.toLowerCase() && obj.favData[j].index === i) {
-            stateFav = true;
-          }
-        }
-
-        if (stateFav) {
-          iconImg.setAttribute('src', './images/star.png');
-        } else {
-          iconImg.setAttribute('src', './images/favorites.png');
-        }
-      } else {
-        iconImg.setAttribute('src', './images/favorites.png');
-      }
-      
       favIcon.appendChild(iconImg);
 
       let textFav = document.createElement('p');
@@ -124,19 +121,15 @@ function displayAttractions(city) {
       favIcon.appendChild(textFav);
     }
   })
-  .catch(() => {
-    if (!Number.isFinite(responseLength)) {
-      const errorMessage = document.getElementById("error");
-      errorMessage.textContent = "Enter correct city Name!";
-    } else {
-      let attractionDivs = document.getElementsByClassName("attr_info");
-      
-      for(let i = responseLength; i < attractionDivs.length; i++) {
-        attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
-      }
-    }
+  .catch((e) => {
+
+    document.getElementById("popup").style.display = "block";
   });
+  
 }
+
+
+
 
 // Added Favorite in local storage
 function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) {
@@ -204,7 +197,7 @@ function takeFavoriteLocal(){
   let localobj = JSON.parse(localStorage.getItem('data')).favData;
   for (let i = 0; i < localobj.length; i++) {
     
-    let favDiv = document.createElement('div');
+    let favDiv = document.createElement('div')
     favDiv.setAttribute("class", "favDiv");
 
     //Create h2 h3 and img tags and add info from local storage
@@ -242,49 +235,19 @@ function takeFavoriteLocal(){
     favDiv.appendChild(locAddr);
     favoriteDiv.appendChild(favDiv);
   }
-
-  let favChangeIcon = document.getElementsByClassName('favImgIcon'),
-      star = true,
-      lengthArrayData = favChangeIcon.length;
-  for (let j = 0; j < lengthArrayData; j++) {
-    favChangeIcon[j].onclick = function () {
-      if (star) {
-        this.setAttribute('src', './images/favorites.png');
-        star = false;
-
-        let isNotFav = false;
-        for (let z = 0; z < localobj.length; z++) {
-          console.log(localobj);
-          console.log(": z is " + z)
-          console.log(": j is " + j)
-          if (localobj[z].city.toLowerCase === localobj[j].city.toLowerCase && localobj[z].index === localobj[j].index) {
-            isNotFav = true;
-          }
-
-          if (isNotFav && z !== localobj.length - 1) {
-            let temp = localobj[z];
-            localobj[z] = localobj[z + 1];
-            localobj[z + 1] = temp;
-          }
-
-          if (z === localobj.length - 1) {
-            localobj.pop();
-            isNotFav = false;
-            console.log("removed")
-
-            let dataFavorites = {
-              favData: localobj
-            }
-
-            localStorage.setItem('data', JSON.stringify(dataFavorites));
+  let favChangeIcon = document.getElementsByClassName('favImgIcon');
+    let star = true;
+    for (let j = 0; j < favChangeIcon.length; j++) {
+        favChangeIcon[j].onclick = function(){
+          if (star) {
+            this.setAttribute('src', './images/favorites.png');
+            star = false;
+          }else{
+            this.setAttribute('src', './images/star.png');
+            star = true;
           }
         }
-      }else{
-        this.setAttribute('src', './images/star.png');
-        star = true;
-      }
     }
-  }console.log(localobj)
 }
 
 // Keyword ENTER submit 
@@ -309,7 +272,8 @@ document.getElementById("favIconDiv").onclick = function () {
   takeFavoriteLocal(); 
 }
 
-document.getElementById('logo').onclick = function () {
-  document.getElementById('info').style.display = 'none';
-  document.getElementById('favoriteAttraction').style.display = 'none'
-}
+// close popup message box
+document.querySelector(".popup-button").addEventListener("click", function() {
+  document.getElementById("popup").style.display = "none";
+})
+
