@@ -243,28 +243,24 @@ function takeFavoriteLocal(){
     favoriteDiv.appendChild(favDiv);
   }
 
+  //Delete favorite Attraction in Favorite page
   let favChangeIcon = document.getElementsByClassName('favImgIcon'),
-      star = true,
+      star = true;
       lengthArrayData = favChangeIcon.length;
-  for (let j = 0; j < lengthArrayData; j++) {
-    favChangeIcon[j].onclick = function () {
+  for (let j = 0; j < localobj.length; j++) {
+    favChangeIcon[j].onclick = function (event) {
       if (star) {
 
         this.setAttribute('src', './images/favorites.png');
         star = false;
-
-        let NewfavChangeIcon = document.getElementsByClassName('favImgIcon'),
-        newFavChange = NewfavChangeIcon.length;
-        for (let k = 0; k < newFavChange; k++) {
-          for (let z = 0; z < localobj.length; z++) {
-            if (localobj[z] === localobj[k]) {
-              localobj.splice(z, 1);
-              let dataFavorites = {
-                favData: localobj
-              }
-              localStorage.setItem('data', JSON.stringify(dataFavorites));
+        for (let z = 0; z < localobj.length; z++) {
+          if (localobj[z].name === localobj[j].name) {
+            localobj.splice(z, 1);
+            let dataFavorites = {
+              favData: localobj
             }
-            break;
+            localStorage.setItem('data', JSON.stringify(dataFavorites));
+            takeFavoriteLocal();
           }
         }
       }else{
