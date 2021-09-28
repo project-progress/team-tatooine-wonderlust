@@ -1,8 +1,10 @@
 // Weather section js
 function displayWeather(city) {
+  let responseLength;
   fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
     .then((response) => response.json())
     .then(function (result) {
+      responseLength = result.length;
       // input value we empty
       document.getElementsByTagName("input")[0].value = "";
 
@@ -36,9 +38,6 @@ function displayWeather(city) {
       // clean childes
       weatherInfo.innerHTML = " ";
 
-      //Error massage delete
-      document.getElementById("error").textContent = "";
-
        // append child
       weatherInfo.appendChild(infoDate);
       weatherInfo.appendChild(infoTemp);
@@ -46,6 +45,15 @@ function displayWeather(city) {
       weatherInfo.appendChild(infoImg);
     })
     .catch(() => {
+      if (!Number.isFinite(responseLength)) {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("backdrop").style.display = "block";
+      } else {
+        let attractionDivs = document.getElementsByClassName("attr_info");
+        for(let i = responseLength; i < attractionDivs.length; i++) {
+          attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
+        }
+      }
       document.getElementById("info").style.display = "none";
     });
 }
@@ -192,10 +200,10 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
 //Take and add in DOM favorite attractions
 function takeFavoriteLocal(){
 
-  // Info hide,  favorit section visiable and error massege delete
+  // Info hide,  favorit section visiable 
   document.getElementById("info").style.display = "none";
   document.getElementById("favoriteAttraction").style.display = "block";
-  document.getElementById("error").textContent = "";
+
   // clear info 
   let favoriteDiv = document.getElementById("favorite");
   favoriteDiv.innerHTML= " ";
