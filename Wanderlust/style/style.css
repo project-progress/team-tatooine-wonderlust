@@ -112,15 +112,6 @@ button {
     cursor: pointer;
 }
 
-.visible{
-    font-size: 20px;
-    letter-spacing: 1.1px;
-    text-align: center;
-    color: #27b7c1;
-    padding-top: 60px;
-    display: block;
-}
-
 #info{
     width: 90%;
     margin: 100px auto 0;
