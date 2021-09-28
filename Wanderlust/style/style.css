@@ -229,12 +229,8 @@ h3 {
     color: #27b7c1;
     margin-top: calc(50% - 9px);
 }
-<<<<<<< HEAD
-#popup{
-=======
 
- #popup{
->>>>>>> bf1432e97fe08d00cd48d2618ac8e7bcf5010d3e
+#popup{
     position: absolute;
     z-index: 100;
     background: white;

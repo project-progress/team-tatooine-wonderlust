@@ -128,10 +128,6 @@ function displayAttractions(city) {
     if (!Number.isFinite(responseLength)) {
       document.getElementById("popup").style.display = "block";
       document.getElementById("backdrop").style.display = "block";
-<<<<<<< HEAD
-      
-=======
->>>>>>> bf1432e97fe08d00cd48d2618ac8e7bcf5010d3e
     } else {
       let attractionDivs = document.getElementsByClassName("attr_info");
       for(let i = responseLength; i < attractionDivs.length; i++) {
@@ -303,21 +299,13 @@ document.getElementById("favIconDiv").onclick = function () {
   takeFavoriteLocal(); 
 }
 
-<<<<<<< HEAD
 //Logo click and clear page 
-=======
-//Logo click refresh page 
->>>>>>> bf1432e97fe08d00cd48d2618ac8e7bcf5010d3e
 document.getElementById('logo').onclick = function () {
   document.getElementById('info').style.display = 'none';
   document.getElementById('favoriteAttraction').style.display = 'none';
 }
 
-<<<<<<< HEAD
 //Close popup message box
-=======
-// close popup message boxer
->>>>>>> bf1432e97fe08d00cd48d2618ac8e7bcf5010d3e
 document.querySelector(".popup-button").addEventListener("click", function() {
   document.getElementById("popup").style.display = "none";
   document.getElementById("backdrop").style.display = "none";
