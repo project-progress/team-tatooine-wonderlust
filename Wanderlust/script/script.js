@@ -127,7 +127,7 @@ function displayAttractions(city) {
   .catch(() => {
     if (!Number.isFinite(responseLength)) {
       document.getElementById("popup").style.display = "block";
-    document.getElementById("backdrop").style.display = "block";
+      document.getElementById("backdrop").style.display = "block";
     } else {
       let attractionDivs = document.getElementsByClassName("attr_info");
       
@@ -293,12 +293,14 @@ document.getElementById("favIconDiv").onclick = function () {
   takeFavoriteLocal(); 
 }
 
+//Logo click refresh page 
 document.getElementById('logo').onclick = function () {
   document.getElementById('info').style.display = 'none';
   document.getElementById('favoriteAttraction').style.display = 'none'
 }
-// close popup message box
+
+// close popup message boxer
 document.querySelector(".popup-button").addEventListener("click", function() {
   document.getElementById("popup").style.display = "none";
   document.getElementById("backdrop").style.display = "none";
-})
+}) 
