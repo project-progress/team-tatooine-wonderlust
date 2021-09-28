@@ -126,8 +126,8 @@ function displayAttractions(city) {
   })
   .catch(() => {
     if (!Number.isFinite(responseLength)) {
-      const errorMessage = document.getElementById("error");
-      errorMessage.textContent = "Enter correct city Name!";
+      document.getElementById("popup").style.display = "block";
+    document.getElementById("backdrop").style.display = "block";
     } else {
       let attractionDivs = document.getElementsByClassName("attr_info");
       
@@ -297,3 +297,8 @@ document.getElementById('logo').onclick = function () {
   document.getElementById('info').style.display = 'none';
   document.getElementById('favoriteAttraction').style.display = 'none'
 }
+// close popup message box
+document.querySelector(".popup-button").addEventListener("click", function() {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById("backdrop").style.display = "none";
+})
