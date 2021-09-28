@@ -209,6 +209,7 @@ h3 {
     font-size: 40px;
     letter-spacing: 1.5px;
     color: #27b7c1;
+    text-transform: capitalize;
 }
 
 .favDiv h2{
@@ -229,13 +230,13 @@ h3 {
     margin-top: calc(50% - 9px);
 }
 #popup{
-    position: fixed;
+    position: absolute;
     z-index: 100;
     background: white;
     border-radius: 10px;
     width: 650px;
     top: 200px;
-    left: 30%;
+    left: calc(50% - 325px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     display: none;
     animation: fade-slide-in 0.3s ease-out forwards;
@@ -246,7 +247,7 @@ h3 {
 .popup-message{
     font-size: 35px;
     color: #27b7c1;
-text-align: center;
+    text-align: center;
 }
 .popup-button{
     margin-left: 40%;
@@ -291,6 +292,10 @@ text-align: center;
         margin: auto;
     }
 
+    form {
+        height: 120px;
+    }
+
     .addrAttr {
         text-align: center;
     }
@@ -325,18 +330,26 @@ text-align: center;
         text-align: center;
         margin-top: 50px;
     }
+
+    #favPage{
+        font-size: 32px;
+    }
+
     #popup{
         width: 350px;
-        
+        left: calc(50% - 175px);
     }
+
     .popup-message{
         font-size: 25px;
         text-align: center;
     }
+
     .popup-button{
         width: 90px;
         height: 35px;
     }
+
     .images-error{
         width: 130px;
         height: 85px;

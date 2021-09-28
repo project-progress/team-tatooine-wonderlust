@@ -127,10 +127,10 @@ function displayAttractions(city) {
   .catch(() => {
     if (!Number.isFinite(responseLength)) {
       document.getElementById("popup").style.display = "block";
-    document.getElementById("backdrop").style.display = "block";
+      document.getElementById("backdrop").style.display = "block";
+      
     } else {
       let attractionDivs = document.getElementsByClassName("attr_info");
-      
       for(let i = responseLength; i < attractionDivs.length; i++) {
         attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
       }
@@ -139,7 +139,7 @@ function displayAttractions(city) {
 }
 
 // Added Favorite in local storage
-function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) {
+function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) { 
   if (localStorage.getItem('data')) {
     let obj = JSON.parse(localStorage.getItem('data'));
     let state = false;
@@ -192,6 +192,7 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
 
 //Take and add in DOM favorite attractions
 function takeFavoriteLocal(){
+
   // Info hide,  favorit section visiable and error massege delete
   document.getElementById("info").style.display = "none";
   document.getElementById("favoriteAttraction").style.display = "block";
@@ -202,6 +203,12 @@ function takeFavoriteLocal(){
   
   //Take from local storage info
   let localobj = JSON.parse(localStorage.getItem('data')).favData;
+  let favEmpty = document.getElementById("favPage");
+  if (localobj == "") {
+    favEmpty.textContent = "you do not have a favorite attractions";
+  }else{
+    favEmpty.textContent = "favorite attractions";
+  }
   for (let i = 0; i < localobj.length; i++) {
     
     let favDiv = document.createElement('div');
@@ -293,11 +300,13 @@ document.getElementById("favIconDiv").onclick = function () {
   takeFavoriteLocal(); 
 }
 
+//Logo click and clear page 
 document.getElementById('logo').onclick = function () {
   document.getElementById('info').style.display = 'none';
-  document.getElementById('favoriteAttraction').style.display = 'none'
+  document.getElementById('favoriteAttraction').style.display = 'none';
 }
-// close popup message box
+
+//Close popup message box
 document.querySelector(".popup-button").addEventListener("click", function() {
   document.getElementById("popup").style.display = "none";
   document.getElementById("backdrop").style.display = "none";
