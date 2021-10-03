@@ -1,21 +1,14 @@
 // Weather section js
 let isTrueCity = false;
 let responseLength = 0;
-
 function displayWeather(city) {
-<<<<<<< HEAD
-  let responseLength;
-=======
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
   fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
     .then((response) => response.json())
     .then(function (result) {
       isTrueCity = true;
       responseLength = result.length;
-
       // input value we empty
       document.getElementsByTagName("input")[0].value = "";
-
       // Info visiable
       document.getElementById("info").style.display = "block";
 
@@ -36,14 +29,7 @@ function displayWeather(city) {
       let cityName = document.getElementById("cityName");
 
       cityName.textContent = result.name;
-<<<<<<< HEAD
       infoImg.setAttribute("src", "https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png");
-=======
-      infoImg.setAttribute(
-        "src",
-        "https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png"
-      );
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
 
       // Weather icon in temp
       infoDate.textContent = newDate; // Day in week
@@ -60,30 +46,26 @@ function displayWeather(city) {
       weatherInfo.appendChild(infoImg);
     })
     .catch(() => {
-<<<<<<< HEAD
-      if (!Number.isFinite(responseLength)) {
-        document.getElementById("popup").style.display = "block";
-        document.getElementById("backdrop").style.display = "block";
-      } else {
-        let attractionDivs = document.getElementsByClassName("attr_info");
-        for(let i = responseLength; i < attractionDivs.length; i++) {
-          attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
-        }
-      }
-=======
+      // if (!Number.isFinite(responseLength)) {
+      //   document.getElementById("popup").style.display = "block";
+      //   document.getElementById("backdrop").style.display = "block";
+      // } else {
+      //   let attractionDivs = document.getElementsByClassName("attr_info");
+      //   for(let i = responseLength; i < attractionDivs.length; i++) {
+      //     attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
+      //   }
+      // }
+      // document.getElementById("info").style.display = "none";
       document.getElementById("popup").style.display = "block";
       document.getElementById("backdrop").style.display = "block";
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
       document.getElementById("info").style.display = "none";
       document.getElementById("input-popup").disabled = true;
       isTrueCity = false;
     });
 }
-
 // Top Attractions section
 function displayAttractions(city) {
-<<<<<<< HEAD
-  let responseLength;
+  let responseLength = 0;
   fetch("https://api.foursquare.com/v2/venues/explore?near=" + city + "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
   .then((response) => response.json())
   .then(function (result) {
@@ -135,73 +117,6 @@ function displayAttractions(city) {
         for (let j = 0; j < obj.favData.length; j++) {
           if (obj.favData[j].city.toLowerCase() === city.toLowerCase() && obj.favData[j].index === i) {
             stateFav = true;
-=======
-  let responseLength = 0;
-  fetch("https://api.foursquare.com/v2/venues/explore?near=" + city + "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
-    .then((response) => response.json())
-    .then(function (result) {
-      let attractionDivs = document.getElementsByClassName("attr_info");
-      let res = result.response.groups[0].items;
-      responseLength = res.length;
-      for (let i = 0; i < attractionDivs.length; i++) {
-        let currentDiv = attractionDivs[i];
-        currentDiv.innerHTML = "";
-
-        // Creat h3 img addres elements and add info from Api and append in DOM
-        let header = document.createElement("h3");
-        header.innerHTML = `${res[i].venue.name}`;
-        header.setAttribute("class", "headerOfAttr");
-        currentDiv.appendChild(header);
-
-        let img = document.createElement("img");
-        img.setAttribute(
-          "src",
-          res[i].venue.categories[0].icon.prefix + "bg_64" + res[i].venue.categories[0].icon.suffix
-        );
-        img.setAttribute("class", "imgAttr");
-        currentDiv.appendChild(img);
-
-        let addr = document.createElement("address");
-        addr.innerHTML = `
-          <span class = 'addrText'>Address:</span> <br>
-          ${res[i].venue.location.address}<br>
-          ${res[i].venue.location.city}<br>
-          ${res[i].venue.location.country}
-        `;
-
-        addr.setAttribute("class", "addrAttr");
-        currentDiv.appendChild(addr);
-
-        //Save attractions in favorite
-        let favIcon = document.createElement("div");
-        favIcon.setAttribute("class", "favIconDiv");
-        favIcon.onclick = function () {
-          addingToFavorites(
-            city,
-            i,
-            res[i].venue.name,
-            res[i].venue.location.address,
-            res[i].venue.location.country,
-            res[i].venue.categories[0].icon.prefix + "bg_64" + res[i].venue.categories[0].icon.suffix
-          );
-        };
-        currentDiv.appendChild(favIcon);
-
-        let iconImg = document.createElement("img");
-        iconImg.setAttribute("class", "favIconImage");
-
-        if (localStorage.getItem("data")) {
-          let obj = JSON.parse(localStorage.getItem("data"));
-          let stateFav = false;
-
-          for (let j = 0; j < obj.favData.length; j++) {
-            if (
-              obj.favData[j].city.toLowerCase() === city.toLowerCase() &&
-              obj.favData[j].index === i
-            ) {
-              stateFav = true;
-            }
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
           }
         }
 
@@ -210,33 +125,8 @@ function displayAttractions(city) {
         } else {
           iconImg.setAttribute('src', './images/favorites.png');
         }
-<<<<<<< HEAD
       } else {
         iconImg.setAttribute('src', './images/favorites.png');
-=======
-
-        favIcon.appendChild(iconImg);
-
-        let textFav = document.createElement("p");
-        textFav.setAttribute("class", "favIconText");
-        textFav.innerText = "Add to favorites";
-        favIcon.appendChild(textFav);
-        favIcon.appendChild(textFav);
-      }
-    })
-    .catch(() => {
-      if (Number.isFinite(responseLength) || (isTrueCity && responseLength === 0)) {
-        let attractionDivs = document.getElementsByClassName("attr_info");
-
-        for (let i = responseLength; i < attractionDivs.length; i++) {
-          attractionDivs[i].innerHTML =
-            "<p class = 'noAttrText'>No attraction to display</p>";
-        }
-      } else {
-        document.getElementById("popup").style.display = "block";
-        document.getElementById("backdrop").style.display = "block";
-        document.getElementById("input-popup").disabled = true;
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
       }
       
       favIcon.appendChild(iconImg);
@@ -249,14 +139,17 @@ function displayAttractions(city) {
     }
   })
   .catch(() => {
-    if (!Number.isFinite(responseLength)) {
+    if (Number.isFinite(responseLength) || (isTrueCity && responseLength === 0)) {
+      let attractionDivs = document.getElementsByClassName("attr_info");
+
+      for (let i = responseLength; i < attractionDivs.length; i++) {
+        attractionDivs[i].innerHTML =
+          "<p class = 'noAttrText'>No attraction to display</p>";
+      }
+    } else {
       document.getElementById("popup").style.display = "block";
       document.getElementById("backdrop").style.display = "block";
-    } else {
-      let attractionDivs = document.getElementsByClassName("attr_info");
-      for(let i = responseLength; i < attractionDivs.length; i++) {
-        attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
-      }
+      document.getElementById("input-popup").disabled = true;
     }
   });
 }
@@ -269,14 +162,9 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
   
     for (let i = 0; i < obj.favData.length; i++) {
       if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === index) {
-<<<<<<< HEAD
         document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/favorites.png');
-=======
-        document.getElementsByClassName("favIconImage")[index].setAttribute("src", "./images/favorites.png");
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
         state = true;
       }
-
       if (state) {
         if (i === obj.favData.length - 1) {
           let a = obj.favData.pop();
@@ -294,23 +182,12 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
         name: name,
         locAddress: locAddress,
         locCountry: locCountry,
-<<<<<<< HEAD
         locIcon: locIcon
       })
       document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
     }
     localStorage.setItem('data', JSON.stringify(obj));
   }else {
-=======
-        locIcon: locIcon,
-      });
-
-      document.getElementsByClassName("favIconImage")[index].setAttribute("src", "./images/star.png");
-    }
-
-    localStorage.setItem("data", JSON.stringify(obj));
-  } else {
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
     let obj = {
       favData: [
         {
@@ -319,22 +196,12 @@ function addingToFavorites (city, index, name, locAddress, locCountry, locIcon) 
           name: name,
           locAddress: locAddress,
           locCountry: locCountry,
-<<<<<<< HEAD
           locIcon: locIcon
         }
       ]
     }
     localStorage.setItem('data', JSON.stringify(obj));
     document.getElementsByClassName('favIconImage')[index].setAttribute('src', './images/star.png');
-=======
-          locIcon: locIcon,
-        },
-      ],
-    };
-    
-    localStorage.setItem("data", JSON.stringify(obj));
-    document.getElementsByClassName("favIconImage")[index].setAttribute("src", "./images/star.png");
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
   }
 
 }
@@ -353,19 +220,11 @@ function takeFavoriteLocal(){
   //Take from local storage info
   let localobj = JSON.parse(localStorage.getItem('data')).favData;
   let favEmpty = document.getElementById("favPage");
-
   if (localobj == "") {
-<<<<<<< HEAD
     favEmpty.textContent = "you do not have a favorite attractions";
   }else{
     favEmpty.textContent = "favorite attractions";
-=======
-    favEmpty.textContent = "You do not have a favorite attractions";
-  } else {
-    favEmpty.textContent = "Favorite attractions";
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
   }
-
   for (let i = 0; i < localobj.length; i++) {
     
     let favDiv = document.createElement('div');
@@ -408,23 +267,15 @@ function takeFavoriteLocal(){
   }
 
   //Delete favorite Attraction in Favorite page
-<<<<<<< HEAD
   let favChangeIcon = document.getElementsByClassName('favImgIcon'),
       star = true;
       lengthArrayData = favChangeIcon.length;
-=======
-  let favChangeIcon = document.getElementsByClassName("favImgIcon"),
-      star = true;
-  lengthArrayData = favChangeIcon.length;
-
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
   for (let j = 0; j < localobj.length; j++) {
     favChangeIcon[j].onclick = function (event) {
       if (star) {
 
         this.setAttribute('src', './images/favorites.png');
         star = false;
-
         for (let z = 0; z < localobj.length; z++) {
           if (localobj[z].name === localobj[j].name) {
             localobj.splice(z, 1);
@@ -443,33 +294,22 @@ function takeFavoriteLocal(){
   }
 }
 
-<<<<<<< HEAD
 // Keyword ENTER submit 
 document.addEventListener("keydown", function (event) {
-  if (event.key == "Enter") {
+  if (document.getElementById("popup").style.display == "block") {
+    if (event.key == "Enter") {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("backdrop").style.display = "none";
+      document.getElementById("input-popup").disabled = false;
+      event.preventDefault();
+    }
+  }else if (event.key == "Enter") {
     let city = document.getElementsByTagName("input")[0].value;
     displayWeather(city);
     displayAttractions(city);
     event.preventDefault();
   }
 })
-=======
-// Keyword and popup ENTER submit
-// document.addEventListener("keydown", function (event) {
-//   if (document.getElementById("popup").style.display == "block") {
-//     if (event.key == "Enter") {
-//       document.getElementById("popup").style.display = "none";
-//       document.getElementById("backdrop").style.display = "none";
-//       document.getElementById("input-popup").disabled = false;
-//     }
-//   } else if (event.key == "Enter") {
-//     let city = document.getElementsByTagName("input")[0].value;
-//     displayWeather(city);
-//     displayAttractions(city);
-//     event.preventDefault();
-//   }
-// });
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
 
 //Click submit 
 document.getElementsByTagName("button")[0].onclick = function () {
@@ -477,7 +317,6 @@ document.getElementsByTagName("button")[0].onclick = function () {
   displayWeather(city);
   displayAttractions(city);
 };
-
 document.getElementById('formSearching').onsubmit = function () {
   let city = document.getElementsByTagName("input")[0].value;
   displayWeather(city);
@@ -500,9 +339,4 @@ document.getElementById('logo').onclick = function () {
 document.querySelector(".popup-button").addEventListener("click", function() {
   document.getElementById("popup").style.display = "none";
   document.getElementById("backdrop").style.display = "none";
-<<<<<<< HEAD
 }) 
-=======
-  document.getElementById("input-popup").disabled = false;
-});
->>>>>>> 9d61fc32a481ff15024c93e242ef65569355d09a
