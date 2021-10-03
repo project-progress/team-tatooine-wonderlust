@@ -339,4 +339,6 @@ document.getElementById('logo').onclick = function () {
 document.querySelector(".popup-button").addEventListener("click", function() {
   document.getElementById("popup").style.display = "none";
   document.getElementById("backdrop").style.display = "none";
+  document.getElementById("input-popup").disabled = false;
+
 }) 
