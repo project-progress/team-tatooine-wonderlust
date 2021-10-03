@@ -1,12 +1,10 @@
 // Weather section js
 let isTrueCity = false;
-let responseLength = 0;
 function displayWeather(city) {
   fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
     .then((response) => response.json())
     .then(function (result) {
       isTrueCity = true;
-      responseLength = result.length;
       // input value we empty
       document.getElementsByTagName("input")[0].value = "";
       // Info visiable
@@ -19,7 +17,7 @@ function displayWeather(city) {
       let date = new Date();
       let option = { weekday: "long" };
       let newDate = new Intl.DateTimeFormat("en-US", option).format(date);
-
+      
       // Creat Element and add to DOM
       let weatherInfo = document.getElementById("weather_info");
       let infoDate = document.createElement("h3");
@@ -46,16 +44,6 @@ function displayWeather(city) {
       weatherInfo.appendChild(infoImg);
     })
     .catch(() => {
-      // if (!Number.isFinite(responseLength)) {
-      //   document.getElementById("popup").style.display = "block";
-      //   document.getElementById("backdrop").style.display = "block";
-      // } else {
-      //   let attractionDivs = document.getElementsByClassName("attr_info");
-      //   for(let i = responseLength; i < attractionDivs.length; i++) {
-      //     attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
-      //   }
-      // }
-      // document.getElementById("info").style.display = "none";
       document.getElementById("popup").style.display = "block";
       document.getElementById("backdrop").style.display = "block";
       document.getElementById("info").style.display = "none";
@@ -269,7 +257,6 @@ function takeFavoriteLocal(){
   //Delete favorite Attraction in Favorite page
   let favChangeIcon = document.getElementsByClassName('favImgIcon'),
       star = true;
-      lengthArrayData = favChangeIcon.length;
   for (let j = 0; j < localobj.length; j++) {
     favChangeIcon[j].onclick = function (event) {
       if (star) {
@@ -316,12 +303,6 @@ document.getElementsByTagName("button")[0].onclick = function () {
   let city = document.getElementsByTagName("input")[0].value;
   displayWeather(city);
   displayAttractions(city);
-};
-document.getElementById('formSearching').onsubmit = function () {
-  let city = document.getElementsByTagName("input")[0].value;
-  displayWeather(city);
-  displayAttractions(city);
-  return false;
 };
 
 //Click favorite
