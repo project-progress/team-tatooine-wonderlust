@@ -7,11 +7,12 @@ function displayWeather(city) {
       isTrueCity = true;
       // input value we empty
       document.getElementsByTagName("input")[0].value = "";
+
       // Info visiable
       document.getElementById("info").style.display = "block";
 
       //Favorite section hide
-      document.getElementById("favoriteAttraction").style.display = "none ";
+      document.getElementById("favoriteAttraction").style.display = "none";
 
       // Takes the name of this day
       let date = new Date();
@@ -131,8 +132,7 @@ function displayAttractions(city) {
       let attractionDivs = document.getElementsByClassName("attr_info");
 
       for (let i = responseLength; i < attractionDivs.length; i++) {
-        attractionDivs[i].innerHTML =
-          "<p class = 'noAttrText'>No attraction to display</p>";
+        attractionDivs[i].innerHTML = "<p class = 'noAttrText'>No attraction to display</p>";
       }
     } else {
       document.getElementById("popup").style.display = "block";
@@ -223,7 +223,7 @@ function takeFavoriteLocal(){
     favCityName.textContent = localobj[i].city;
     
     let faveAttrName = document.createElement("h3");
-    faveAttrName.innerHTML = `${ localobj[i].name}`;
+    faveAttrName.innerHTML = localobj[i].name;
     faveAttrName.setAttribute("class", "headerOfAttr");
 
     let favImg = document.createElement("img");
@@ -255,27 +255,18 @@ function takeFavoriteLocal(){
   }
 
   //Delete favorite Attraction in Favorite page
-  let favChangeIcon = document.getElementsByClassName('favImgIcon'),
-      star = true;
+  let favChangeIcon = document.getElementsByClassName('favImgIcon');
   for (let j = 0; j < localobj.length; j++) {
-    favChangeIcon[j].onclick = function (event) {
-      if (star) {
-
-        this.setAttribute('src', './images/favorites.png');
-        star = false;
-        for (let z = 0; z < localobj.length; z++) {
-          if (localobj[z].name === localobj[j].name) {
-            localobj.splice(z, 1);
-            let dataFavorites = {
-              favData: localobj
-            }
-            localStorage.setItem('data', JSON.stringify(dataFavorites));
-            takeFavoriteLocal();
+    favChangeIcon[j].onclick = function () {
+      for (let z = 0; z < localobj.length; z++) {
+        if (localobj[z].name === localobj[j].name) {
+          localobj.splice(z, 1);
+          let dataFavorites = {
+            favData: localobj
           }
+          localStorage.setItem('data', JSON.stringify(dataFavorites));
+          takeFavoriteLocal();
         }
-      }else{
-        this.setAttribute('src', './images/star.png');
-        star = true;
       }
     }
   }
