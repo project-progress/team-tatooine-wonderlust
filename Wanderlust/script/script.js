@@ -1,14 +1,14 @@
 // Weather section js
+let isTrueCity = false;
+let responseLength = 0;
+
 function displayWeather(city) {
-  let responseLength;
-  fetch(
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
-      city +
-      "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric"
-  )
+  fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5d5c5e800344c0d09a75889442acf66f&units=metric")
     .then((response) => response.json())
     .then(function (result) {
+      isTrueCity = true;
       responseLength = result.length;
+
       // input value we empty
       document.getElementsByTagName("input")[0].value = "";
 
@@ -34,9 +34,7 @@ function displayWeather(city) {
       cityName.textContent = result.name;
       infoImg.setAttribute(
         "src",
-        "https://openweathermap.org/img/wn/" +
-          result.weather[0].icon +
-          "@2x.png"
+        "https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png"
       );
 
       // Weather icon in temp
@@ -54,33 +52,23 @@ function displayWeather(city) {
       weatherInfo.appendChild(infoImg);
     })
     .catch(() => {
-      if (!Number.isFinite(responseLength)) {
-        document.getElementById("popup").style.display = "block";
-        document.getElementById("backdrop").style.display = "block";
-      } else {
-        let attractionDivs = document.getElementsByClassName("attr_info");
-        for (let i = responseLength; i < attractionDivs.length; i++) {
-          attractionDivs[i].innerHTML =
-            "<p class = 'noAttrText'>No attraction to display</p>";
-        }
-      }
+      document.getElementById("popup").style.display = "block";
+      document.getElementById("backdrop").style.display = "block";
       document.getElementById("info").style.display = "none";
+      document.getElementById("input-popup").disabled = true;
+      isTrueCity = false;
     });
 }
+
 // Top Attractions section
 function displayAttractions(city) {
-  let responseLength;
-  fetch(
-    "https://api.foursquare.com/v2/venues/explore?near=" +
-      city +
-      "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924"
-  )
+  let responseLength = 0;
+  fetch("https://api.foursquare.com/v2/venues/explore?near=" + city + "&client_id=CK2STORWRLE22ONGCMZ3PHAKMABVS0324RURA0KNT3M5JAAF&client_secret=WS00YPBBKPAQJLHBNO1YRYBCERTN3EB2MPFYQ5TI2C3GEJWH&v=20210924")
     .then((response) => response.json())
     .then(function (result) {
       let attractionDivs = document.getElementsByClassName("attr_info");
       let res = result.response.groups[0].items;
       responseLength = res.length;
-
       for (let i = 0; i < attractionDivs.length; i++) {
         let currentDiv = attractionDivs[i];
         currentDiv.innerHTML = "";
@@ -94,20 +82,18 @@ function displayAttractions(city) {
         let img = document.createElement("img");
         img.setAttribute(
           "src",
-          res[i].venue.categories[0].icon.prefix +
-            "bg_64" +
-            res[i].venue.categories[0].icon.suffix
+          res[i].venue.categories[0].icon.prefix + "bg_64" + res[i].venue.categories[0].icon.suffix
         );
         img.setAttribute("class", "imgAttr");
         currentDiv.appendChild(img);
 
         let addr = document.createElement("address");
         addr.innerHTML = `
-        <span class = 'addrText'>Address:</span> <br>
-        ${res[i].venue.location.address}<br>
-        ${res[i].venue.location.city}<br>
-        ${res[i].venue.location.country}
-      `;
+          <span class = 'addrText'>Address:</span> <br>
+          ${res[i].venue.location.address}<br>
+          ${res[i].venue.location.city}<br>
+          ${res[i].venue.location.country}
+        `;
 
         addr.setAttribute("class", "addrAttr");
         currentDiv.appendChild(addr);
@@ -122,9 +108,7 @@ function displayAttractions(city) {
             res[i].venue.name,
             res[i].venue.location.address,
             res[i].venue.location.country,
-            res[i].venue.categories[0].icon.prefix +
-              "bg_64" +
-              res[i].venue.categories[0].icon.suffix
+            res[i].venue.categories[0].icon.prefix + "bg_64" + res[i].venue.categories[0].icon.suffix
           );
         };
         currentDiv.appendChild(favIcon);
@@ -164,16 +148,17 @@ function displayAttractions(city) {
       }
     })
     .catch(() => {
-      if (!Number.isFinite(responseLength)) {
-        document.getElementById("popup").style.display = "block";
-        document.getElementById("backdrop").style.display = "block";
-        document.getElementById("input-popup").disabled = true;
-      } else {
+      if (Number.isFinite(responseLength) || (isTrueCity && responseLength === 0)) {
         let attractionDivs = document.getElementsByClassName("attr_info");
+
         for (let i = responseLength; i < attractionDivs.length; i++) {
           attractionDivs[i].innerHTML =
             "<p class = 'noAttrText'>No attraction to display</p>";
         }
+      } else {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("backdrop").style.display = "block";
+        document.getElementById("input-popup").disabled = true;
       }
     });
 }
@@ -185,15 +170,11 @@ function addingToFavorites(city, index, name, locAddress, locCountry, locIcon) {
     let state = false;
 
     for (let i = 0; i < obj.favData.length; i++) {
-      if (
-        obj.favData[i].city.toLowerCase() === city.toLowerCase() &&
-        obj.favData[i].index === index
-      ) {
-        document
-          .getElementsByClassName("favIconImage")
-          [index].setAttribute("src", "./images/favorites.png");
+      if (obj.favData[i].city.toLowerCase() === city.toLowerCase() && obj.favData[i].index === index) {
+        document.getElementsByClassName("favIconImage")[index].setAttribute("src", "./images/favorites.png");
         state = true;
       }
+
       if (state) {
         if (i === obj.favData.length - 1) {
           let a = obj.favData.pop();
@@ -213,10 +194,10 @@ function addingToFavorites(city, index, name, locAddress, locCountry, locIcon) {
         locCountry: locCountry,
         locIcon: locIcon,
       });
-      document
-        .getElementsByClassName("favIconImage")
-        [index].setAttribute("src", "./images/star.png");
+
+      document.getElementsByClassName("favIconImage")[index].setAttribute("src", "./images/star.png");
     }
+
     localStorage.setItem("data", JSON.stringify(obj));
   } else {
     let obj = {
@@ -231,10 +212,9 @@ function addingToFavorites(city, index, name, locAddress, locCountry, locIcon) {
         },
       ],
     };
+    
     localStorage.setItem("data", JSON.stringify(obj));
-    document
-      .getElementsByClassName("favIconImage")
-      [index].setAttribute("src", "./images/star.png");
+    document.getElementsByClassName("favIconImage")[index].setAttribute("src", "./images/star.png");
   }
 }
 
@@ -251,11 +231,13 @@ function takeFavoriteLocal() {
   //Take from local storage info
   let localobj = JSON.parse(localStorage.getItem("data")).favData;
   let favEmpty = document.getElementById("favPage");
+
   if (localobj == "") {
-    favEmpty.textContent = "you do not have a favorite attractions";
+    favEmpty.textContent = "You do not have a favorite attractions";
   } else {
-    favEmpty.textContent = "favorite attractions";
+    favEmpty.textContent = "Favorite attractions";
   }
+
   for (let i = 0; i < localobj.length; i++) {
     let favDiv = document.createElement("div");
     favDiv.setAttribute("class", "favDiv");
@@ -298,13 +280,15 @@ function takeFavoriteLocal() {
 
   //Delete favorite Attraction in Favorite page
   let favChangeIcon = document.getElementsByClassName("favImgIcon"),
-    star = true;
+      star = true;
   lengthArrayData = favChangeIcon.length;
+
   for (let j = 0; j < localobj.length; j++) {
     favChangeIcon[j].onclick = function (event) {
       if (star) {
         this.setAttribute("src", "./images/favorites.png");
         star = false;
+
         for (let z = 0; z < localobj.length; z++) {
           if (localobj[z].name === localobj[j].name) {
             localobj.splice(z, 1);
@@ -324,26 +308,33 @@ function takeFavoriteLocal() {
 }
 
 // Keyword and popup ENTER submit
-document.addEventListener("keydown", function (event) {
-  if (document.getElementById("popup").style.display == "block") {
-    if (event.key == "Enter") {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("backdrop").style.display = "none";
-      document.getElementById("input-popup").disabled = false;
-    }
-  } else if (event.key == "Enter") {
-    let city = document.getElementsByTagName("input")[0].value;
-    displayWeather(city);
-    displayAttractions(city);
-    event.preventDefault();
-  }
-});
+// document.addEventListener("keydown", function (event) {
+//   if (document.getElementById("popup").style.display == "block") {
+//     if (event.key == "Enter") {
+//       document.getElementById("popup").style.display = "none";
+//       document.getElementById("backdrop").style.display = "none";
+//       document.getElementById("input-popup").disabled = false;
+//     }
+//   } else if (event.key == "Enter") {
+//     let city = document.getElementsByTagName("input")[0].value;
+//     displayWeather(city);
+//     displayAttractions(city);
+//     event.preventDefault();
+//   }
+// });
 
 //Click submit
 document.getElementsByTagName("button")[0].onclick = function () {
   let city = document.getElementsByTagName("input")[0].value;
   displayWeather(city);
   displayAttractions(city);
+};
+
+document.getElementById('formSearching').onsubmit = function () {
+  let city = document.getElementsByTagName("input")[0].value;
+  displayWeather(city);
+  displayAttractions(city);
+  return false;
 };
 
 //Click favorite

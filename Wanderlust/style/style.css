@@ -220,7 +220,7 @@ h3 {
 .noAttrText {
   text-align: center;
   color: #27b7c1;
-  margin-top: calc(50% - 9px);
+  margin: calc(50% - 9px) auto;
 }
 
 #popup {
@@ -242,17 +242,20 @@ h3 {
   color: #27b7c1;
   text-align: center;
 }
+
 .popup-button {
   margin-left: 40%;
   margin-top: 25px;
   margin-bottom: 15px;
 }
+
 .images-error {
   width: 180px;
   height: 130px;
   margin-left: 36%;
   margin-top: 25px;
 }
+
 #backdrop {
   position: fixed;
   width: 100%;
@@ -264,6 +267,7 @@ h3 {
   pointer-events: all;
   display: none;
 }
+
 @media (max-width: 845px) {
   #search {
     background: url("https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_moble.jpg");
@@ -272,7 +276,7 @@ h3 {
   }
 
   .noAttrText {
-    margin-top: 16px;
+    margin: 16px auto;
   }
 
   h1 {
@@ -347,6 +351,7 @@ h3 {
     width: 130px;
     height: 85px;
   }
+
   #popup {
     left: calc(50% - 175px);
   }
