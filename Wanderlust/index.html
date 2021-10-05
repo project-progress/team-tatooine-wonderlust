@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+    <script defer src="script/script.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body> 
+    <header>
+        <div id="logo">
+            <img src="https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/logo.svg" alt="logo">
+        </div>
+        <div id="favIconDiv">
+            <img src="./images/list.png" alt="Icon">
+            <p>My favorites</p>
+        </div>
+    </header>
+    <main>
+        <section id="search">
+            <div>
+                <h1>Where do you want to land?</h1>
+                <form>
+                    <input type="text" id="input-popup" value="">
+                    <button type='button'>Submit</button>
+                </form>
+            </div>
+        </section>
+        <section id="info">
+            <div id="weather">
+                <p id="cityName"></p>
+                <h2>CURRENT WEATHER</h2>
+                <div id="weather_info"></div>
+            </div>
+            <div class="attraction">
+                <h2>TOP ATTRACTIONS</h2>
+                <div id="top_atr">
+                    <div class="attr_info"></div>
+                    <div class="attr_info"></div>
+                    <div class="attr_info"></div>
+                </div>
+            </div>
+       </section>
+       <section id="favoriteAttraction">
+            <h2 id="favPage"></h2>
+            <div id="favorite"></div>
+       </section>
+       <section>
+           <div id="popup">
+                <img src="./images/error.png" class="images-error">
+                <div class="popup-message"> Enter correct city Name! </div>
+                <button type="button" class="popup-button">OK</button>
+            </div>
+        </section>
+        <div id="backdrop">
+
+        </div>
+    </main>
+</body>
+</html>

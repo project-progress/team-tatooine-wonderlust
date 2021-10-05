@@ -1,0 +1,355 @@
+body {
+  margin: 0;
+}
+
+#search {
+  background: url("https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_desktop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+#logo img {
+  margin: 10px;
+}
+
+header {
+  overflow: hidden;
+}
+
+#logo {
+  cursor: pointer;
+  width: fit-content;
+  float: left;
+}
+
+#favIconDiv {
+  margin-top: 5px;
+  float: right;
+  cursor: pointer;
+  width: fit-content;
+  padding-left: 15px;
+  padding-right: 10px;
+  margin-right: 20px;
+}
+
+#favIconDiv:hover {
+  background-color: rgb(64, 179, 255);
+  border-radius: 15px;
+}
+
+#favIconDiv img {
+  float: left;
+  margin-top: 12px;
+  margin-right: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+#favIconDiv p {
+  float: right;
+  margin-right: 10px;
+}
+
+.favIconDiv {
+  width: fit-content;
+  margin: 10px auto;
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.favIconDiv:hover {
+  background-color: rgb(64, 179, 255);
+}
+
+.favIconImage {
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-top: 8px;
+}
+
+.favIconText {
+  width: fit-content;
+  float: right;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+h1 {
+  font-family: Montserrat;
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: 1.1px;
+  text-align: center;
+  color: #ffffff;
+  margin: auto;
+  padding-top: 150px;
+  padding-bottom: 50px;
+}
+
+form {
+  height: 100px;
+}
+
+input {
+  width: 300px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 5px;
+  background: none;
+  font-size: 20px;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  color: white;
+  background-color: #27b7c1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#info {
+  width: 90%;
+  margin: 100px auto 0;
+  padding-bottom: 50px;
+  display: none;
+}
+
+#cityName {
+  color: #27b7c1;
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0;
+}
+
+#weather_info {
+  width: 230px;
+  height: 280px;
+  margin: auto;
+  box-shadow: -3px 3px 10px 1px silver;
+  padding: 20px 0 0 20px;
+}
+
+#top_atr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.attr_info {
+  width: 280px;
+  box-shadow: -2px 2px 7px 1px silver;
+}
+
+h3 {
+  font-weight: 100;
+  font-size: 20px;
+  margin: 2px 0;
+}
+
+.headerOfAttr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.addrText {
+  color: #27b7c1;
+}
+
+.addrAttr {
+  font-size: 20px;
+}
+
+.addrAttr,
+.imgAttr {
+  margin-left: 10px;
+}
+
+.attraction,
+#weather {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#favoriteAttraction {
+  width: 90%;
+  margin: 100px auto 0;
+  padding-bottom: 50px;
+  display: none;
+}
+
+#favorite {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#favorite div {
+  width: 30%;
+  margin: 0 0 2% 2%;
+  box-shadow: -2px 2px 7px 1px silver;
+}
+
+#favPage {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 40px;
+  letter-spacing: 1.5px;
+  color: #27b7c1;
+  text-transform: capitalize;
+}
+
+.favDiv h2 {
+  text-transform: capitalize;
+}
+
+.favImgIcon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  float: right;
+  margin: 10px 10px 0 0;
+}
+
+.noAttrText {
+  text-align: center;
+  color: #27b7c1;
+  margin: calc(50% - 9px) auto;
+}
+
+#popup {
+  position: absolute;
+  z-index: 100;
+  background: white;
+  border-radius: 10px;
+  width: 650px;
+  top: 200px;
+  left: calc(50% - 325px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  display: none;
+  animation: fade-slide-in 0.3s ease-out forwards;
+  border: #27b7c1 solid 2px;
+}
+
+.popup-message {
+  font-size: 35px;
+  color: #27b7c1;
+  text-align: center;
+}
+
+.popup-button {
+  margin-left: 40%;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.images-error {
+  width: 180px;
+  height: 130px;
+  margin-left: 36%;
+  margin-top: 25px;
+}
+
+#backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+  pointer-events: all;
+  display: none;
+}
+
+@media (max-width: 845px) {
+  #search {
+    background: url("https://content.codecademy.com/courses/intermediate-javascript-requests/wanderlust/background_photo_moble.jpg");
+    background-size: cover;
+  }
+
+  .noAttrText {
+    margin: 16px auto;
+  }
+
+  h1 {
+    padding-top: 80px;
+    font-size: 32px !important;
+  }
+
+  #logo {
+    margin: auto;
+  }
+
+  form {
+    height: 120px;
+  }
+
+  .addrAttr {
+    text-align: center;
+  }
+
+  .imgAttr {
+    margin-left: calc(50% - 32px) !important;
+  }
+
+  #top_atr {
+    flex-direction: column !important;
+    margin: 20px auto !important;
+    justify-content: center !important;
+    width: 95%;
+  }
+
+  .attr_info,
+  #favorite div {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  #weather {
+    width: 95%;
+    text-align: center;
+  }
+
+  #weather_info {
+    width: 100% !important;
+    padding-left: 0;
+  }
+
+  .attraction h2 {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  #favPage {
+    font-size: 32px;
+  }
+
+  #popup {
+    width: 350px;
+    left: calc(50% - 175px);
+  }
+
+  .popup-message {
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .popup-button {
+    width: 90px;
+    height: 35px;
+  }
+
+  .images-error {
+    width: 130px;
+    height: 85px;
+  }
+}
